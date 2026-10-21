@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed — ZELLE HAIR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/zelle-hair-logo-primary.svg?v=3" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="checkout-result">
+  <main class="checkout-result-card">
+    <a href="index.html" class="brand brand-image checkout-logo" aria-label="Zelle Hair home"><img src="assets/zelle-hair-logo-primary.svg?v=3" alt="Zelle Hair" /></a>
+    <span class="order-mark">Order confirmed</span>
+    <h1>Thank you for<br /><em>choosing Zelle.</em></h1>
+    <p>Your payment was successful. A confirmation and tracking details will be sent to your email address.</p>
+    <a href="store.html" class="btn btn-lacquer">Continue shopping <span>→</span></a>
+  </main>
+  <footer class="site-footer checkout-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo footer-logo-image" aria-label="Zelle Hair home"><img src="assets/zelle-hair-logo-primary.svg?v=3" alt="Zelle Hair" /></a>
+          <p>Pure elegance, uncompromising radiance. Premium virgin hair for the modern muse.</p>
+          <div class="socials"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="TikTok">TT</a><a href="#" aria-label="Pinterest">PN</a></div>
+        </div>
+        <div class="footer-col"><h4>Shop</h4><ul><li><a href="store.html">Extensions</a></li><li><a href="store.html">Wigs</a></li><li><a href="store.html">Bundles</a></li><li><a href="store.html">Frontals</a></li></ul></div>
+        <div class="footer-col"><h4>Support</h4><ul><li><a href="policy.html#shipping">Shipping</a></li><li><a href="policy.html#returns">Returns</a></li><li><a href="policy.html#care">Care Guide</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+        <div class="footer-col newsletter"><h4>The Inner Circle</h4><p>Early access to drops, rituals, and private offers.</p><form class="newsletter-form"><input type="email" placeholder="Your email address" aria-label="Email address" required /><button type="submit">Join</button></form></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 ZELLE HAIR. All rights reserved.</span><span>London, United Kingdom</span></div>
+    </div>
+  </footer>
+  <script>
+    localStorage.removeItem('zelle-cart');
+    document.querySelector('.newsletter-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      this.innerHTML = '<p class="newsletter-success">Welcome to the house of ZELLE.</p>';
+    });
+  </script>
+</body>
+</html>
