@@ -76,15 +76,41 @@
 
   const chips = document.querySelectorAll('.chip');
   const cards = document.querySelectorAll('.product-card[data-cat]');
-  chips.forEach((chip) => chip.addEventListener('click', () => {
-    chips.forEach((item) => item.classList.remove('active'));
-    chip.classList.add('active');
-    cards.forEach((card) => {
-      const show = chip.dataset.filter === 'all' || card.dataset.cat === chip.dataset.filter;
-      card.classList.toggle('hide', !show);
-      if (show) { card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop'); }
+  const applyFilter = (category) => {
+    const selected = Array.from(chips).some((chip) => chip.dataset.filter === category) ? category : 'all';
+    chips.forEach((chip) => {
+      const active = chip.dataset.filter === selected;
+      chip.classList.toggle('active', active);
+      chip.setAttribute('aria-pressed', String(active));
     });
-  }));
+    let count = 0;
+    cards.forEach((card) => {
+      const show = selected === 'all' || card.dataset.cat === selected;
+      card.hidden = !show;
+      card.classList.toggle('hide', !show);
+      if (show) {
+        count += 1;
+        card.classList.add('in');
+        card.classList.remove('pop');
+        void card.offsetWidth;
+        card.classList.add('pop');
+      }
+    });
+    const status = document.querySelector('.filter-status');
+    if (status) status.textContent = `${count} ${selected === 'all' ? 'pieces' : selected} in the collection`;
+  };
+  if (chips.length) {
+    const readFilter = () => applyFilter(new URLSearchParams(window.location.search).get('category') || 'all');
+    chips.forEach((chip) => chip.addEventListener('click', () => {
+      const url = new URL(window.location.href);
+      if (chip.dataset.filter === 'all') url.searchParams.delete('category');
+      else url.searchParams.set('category', chip.dataset.filter);
+      window.history.pushState(null, '', url);
+      applyFilter(chip.dataset.filter);
+    }));
+    window.addEventListener('popstate', readFilter);
+    readFilter();
+  }
 
   const currency = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' });
   let cart = JSON.parse(localStorage.getItem('zelle-cart') || '[]');
